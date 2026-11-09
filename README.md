@@ -1,8 +1,7 @@
 # Modelagem e controle de conversores
 
-Este repositório reúne os modelos de simulação do **Boost** e do **Buck-Boost** com a sequência de modelagem que desenvolvi no meu caderno. A ideia é conseguir acompanhar o caminho sem pular etapas: primeiro vemos o circuito em cada posição da chave, depois escrevemos as equações de estado, fazemos a média por período de comutação e chegamos ao modelo de pequenos sinais.
+Este repositório reúne os modelos de simulação do **Boost** e do **Buck-Boost** com a sequência de modelagem que desenvolvi no meu caderno. Primeiro vemos o circuito em cada posição da chave, depois escrevemos as equações de estado, fazemos a média por período de comutação e chegamos ao modelo de pequenos sinais.
 
-As equações abaixo foram transcritas do PDF manuscrito para LaTeX. Mantive a notação, a ordem e os sinais como aparecem no documento. Os esquemas desenhados à mão também vieram de lá.
 
 ## O que está neste repositório
 
