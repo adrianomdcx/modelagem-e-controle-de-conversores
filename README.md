@@ -19,10 +19,12 @@ Este repositório reúne os modelos de simulação do **Boost** e do **Buck-Boos
 │   ├── boost
 │   │   ├── boost_corrente.png
 │   │   ├── boost_tensao.png
+│   │   ├── boost_transitorio_zoom.png
 │   │   └── boost_dados.csv
 │   └── buck-boost
 │       ├── buck_boost_corrente.png
 │       ├── buck_boost_tensao.png
+│       ├── buck_boost_transitorio_zoom.png
 │       └── buck_boost_dados.csv
 └── simulacoes
     ├── boost
@@ -48,10 +50,10 @@ O recorte abaixo preserva o esquema que desenhei no PDF.
 Na primeira etapa, as relações escalares e a representação em espaço de estados aparecem assim no caderno (página 23):
 
 ```math
-\begin{aligned}
-\dot{i}_L(t) &= \frac{1}{L}V_g \\
-\dot{v}(t) &= -\frac{1}{RC}v(t)
-\end{aligned}
+\begin{gathered}
+\dot{i}_L(t) = \frac{1}{L}V_g \\
+\dot{v}(t) = -\frac{1}{RC}v(t)
+\end{gathered}
 ```
 
 ```math
@@ -97,12 +99,12 @@ v(t)
 A segunda etapa está na página 24. Transcrevi as relações escalares e, em seguida, a matriz exatamente como foram escritas:
 
 ```math
-\begin{aligned}
-v_L &= v \\
-\dot{i}_L(t) &= \frac{1}{L}v \\
-i_C &= -i_L-i_r \\
-C\dot{v}(t) &= -i_L-\frac{v}{R}
-\end{aligned}
+\begin{gathered}
+v_L = v \\
+\dot{i}_L(t) = \frac{1}{L}v \\
+i_C = -i_L-i_r \\
+C\dot{v}(t) = -i_L-\frac{v}{R}
+\end{gathered}
 ```
 
 ```math
@@ -182,12 +184,12 @@ Estes recortes mostram as etapas `S on` e `S off` do esquema Boost no PDF (pági
 No caderno, a corrente do indutor e a tensão no capacitor obedecem às relações abaixo (página 25):
 
 ```math
-\begin{aligned}
-V_g-L\frac{di_L(t)}{dt} &= 0 \\
-\dot{i}_L(t) &= \frac{1}{L}V_g \\
-i_C+i_r &= C\frac{dv_C(t)}{dt}+\frac{v_C(t)}{R}=0 \\
-\dot{v}_C(t) &= -\frac{1}{RC}v_C(t)
-\end{aligned}
+\begin{gathered}
+V_g-L\frac{di_L(t)}{dt} = 0 \\
+\dot{i}_L(t) = \frac{1}{L}V_g \\
+i_C+i_r = C\frac{dv_C(t)}{dt}+\frac{v_C(t)}{R}=0 \\
+\dot{v}_C(t) = -\frac{1}{RC}v_C(t)
+\end{gathered}
 ```
 
 ```math
@@ -216,12 +218,12 @@ v_C(t)
 Com a chave desligada, o indutor também entrega energia à saída (página 26):
 
 ```math
-\begin{aligned}
-V_g-L\frac{di_L(t)}{dt}-v_C(t) &= 0 \\
-\dot{i}_L(t) &= -\frac{1}{L}v_C(t)+\frac{1}{L}V_g \\
-i_L &= i_C+i_r=C\frac{dv_C(t)}{dt}+\frac{v_C(t)}{R} \\
-\dot{v}_C(t) &= \frac{1}{C}i_L(t)-\frac{1}{RC}v_C(t)
-\end{aligned}
+\begin{gathered}
+V_g-L\frac{di_L(t)}{dt}-v_C(t) = 0 \\
+\dot{i}_L(t) = -\frac{1}{L}v_C(t)+\frac{1}{L}V_g \\
+i_L = i_C+i_r=C\frac{dv_C(t)}{dt}+\frac{v_C(t)}{R} \\
+\dot{v}_C(t) = \frac{1}{C}i_L(t)-\frac{1}{RC}v_C(t)
+\end{gathered}
 ```
 
 ```math
@@ -328,7 +330,7 @@ O arquivo `BUCKboost_fim.slxc` foi mantido em `simulacoes/cache/` porque veio ju
 
 ## Modelagem e simulação lado a lado
 
-Executei os dois modelos por 0,05 s no MATLAB R2024b com Simulink e Simscape Electrical. Nos osciloscópios `I` e `V`, o primeiro sinal vem dos medidores do circuito comutado e o segundo vem do bloco `Modelo transitório`, em espaço de estados. Os gráficos mostram a partida inteira e, abaixo, o último milissegundo. Os CSVs guardam os dados registrados, inclusive a polaridade original da tensão.
+Executei os dois modelos por 0,05 s no MATLAB R2024b com Simulink e Simscape Electrical. Nos osciloscópios `I` e `V`, o primeiro sinal vem dos medidores do circuito comutado e o segundo vem do bloco `Modelo transitório`, em espaço de estados. O zoom mostra os primeiros 12 ms da partida; os gráficos completos também mostram o último milissegundo. Os CSVs guardam os dados registrados, inclusive a polaridade original da tensão.
 
 Para comparar valores próximos do regime, calculei a média temporal dos sinais no último 1 ms. A diferença abaixo é relativa ao valor do bloco em espaço de estados.
 
@@ -341,15 +343,33 @@ Para comparar valores próximos do regime, calculei a média temporal dos sinais
 
 ### Boost
 
+O zoom permite enxergar o pico inicial, a oscilação amortecida e a ondulação do circuito comutado em relação ao modelo em espaço de estados.
+
+![Zoom do transitório do Boost: corrente e tensão do circuito comutado comparadas com a modelagem](resultados/boost/boost_transitorio_zoom.png)
+
+<details>
+<summary>Ver os gráficos completos do Boost e o último 1 ms</summary>
+
 ![Comparação da corrente do Boost: circuito comutado e espaço de estados](resultados/boost/boost_corrente.png)
 
 ![Comparação da tensão do Boost: circuito comutado e espaço de estados](resultados/boost/boost_tensao.png)
 
+</details>
+
 ### Buck-Boost
+
+No zoom da tensão, comparei os módulos porque o medidor do circuito e o bloco em espaço de estados usam polaridades opostas.
+
+![Zoom do transitório do Buck-Boost: corrente e módulo da tensão comparados com a modelagem](resultados/buck-boost/buck_boost_transitorio_zoom.png)
+
+<details>
+<summary>Ver os gráficos completos do Buck-Boost e o último 1 ms</summary>
 
 ![Comparação da corrente do Buck-Boost: circuito comutado e espaço de estados](resultados/buck-boost/buck_boost_corrente.png)
 
 ![Comparação da tensão do Buck-Boost com as polaridades originais e os módulos no último milissegundo](resultados/buck-boost/buck_boost_tensao.png)
+
+</details>
 
 No Buck-Boost, o medidor do circuito registra aproximadamente −66,646 V, enquanto o bloco em espaço de estados fornece +66,667 V. Por isso a tabela compara os módulos. Essa concordância de magnitude não resolve a diferença de sinal; a convenção de polaridade do modelo e a divergência entre as relações escalares e a matriz da página 24 precisam ser consideradas ao interpretar a representação em espaço de estados. Mantive os sinais que saíram de cada simulação.
 
