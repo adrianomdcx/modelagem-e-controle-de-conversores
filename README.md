@@ -369,9 +369,7 @@ No zoom da tensão, comparei os módulos porque o medidor do circuito e o bloco 
 
 ![Comparação da tensão do Buck-Boost com as polaridades originais e os módulos no último milissegundo](resultados/buck-boost/buck_boost_tensao.png)
 
-</details>
 
-No Buck-Boost, o medidor do circuito registra aproximadamente −66,646 V, enquanto o bloco em espaço de estados fornece +66,667 V. Por isso a tabela compara os módulos. Essa concordância de magnitude não resolve a diferença de sinal; a convenção de polaridade do modelo e a divergência entre as relações escalares e a matriz da página 24 precisam ser consideradas ao interpretar a representação em espaço de estados. Mantive os sinais que saíram de cada simulação.
 
 
 
