@@ -373,12 +373,7 @@ No zoom da tensão, comparei os módulos porque o medidor do circuito e o bloco 
 
 No Buck-Boost, o medidor do circuito registra aproximadamente −66,646 V, enquanto o bloco em espaço de estados fornece +66,667 V. Por isso a tabela compara os módulos. Essa concordância de magnitude não resolve a diferença de sinal; a convenção de polaridade do modelo e a divergência entre as relações escalares e a matriz da página 24 precisam ser consideradas ao interpretar a representação em espaço de estados. Mantive os sinais que saíram de cada simulação.
 
-## Como abrir
 
-1. Abra o MATLAB e adicione a pasta do conversor desejado ao caminho.
-2. Para o Boost, execute `boost_parametros.m` antes de abrir `boost_conversor.slx`; assim o bloco de espaço de estados encontra as matrizes esperadas.
-3. Abra o `.slx` correspondente no Simulink. Os modelos usam blocos da biblioteca `sps_lib` e o bloco `powergui`.
-4. Para o Buck-Boost, execute `buck_boost_parametros.m` antes de abrir `buck_boost_conversor.slx`; o script define `Ap`, `Bp`, `Cp` e `Ep` segundo as matrizes escritas no PDF.
 
 ## Referência bibliográfica
 
