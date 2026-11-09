@@ -18,10 +18,10 @@ As equações abaixo foram transcritas do PDF manuscrito para LaTeX. Mantive a n
 │       └── Modelagem_e_controle_de_conversores.pdf
 └── simulacoes
     ├── boost
-    │   ├── Boost.slx
-    │   └── Boostscript.m
+    │   ├── boost_conversor.slx
+    │   └── boost_parametros.m
     ├── buck-boost
-    │   └── BUCKboost_fim2.slx
+    │   └── buck_boost_conversor.slx
     └── cache
         └── BUCKboost_fim.slxc
 ```
@@ -312,15 +312,19 @@ A razão cíclica aparece como uma entrada do modelo de pequenos sinais. É isso
 
 | Conversor | Arquivos e parâmetros encontrados |
 |---|---|
-| Boost | `Boost.slx` e `Boostscript.m`; indutor de 500 µH, capacitor de 100 µF, carga de 5 Ω, fonte de 48 V, razão cíclica de 40% e comutação de 20 kHz. O bloco de espaço de estados usa as matrizes `Ab`, `Bb`, `Cb` e `Eb`, que são definidas pelo script. |
-| Buck-Boost | `BUCKboost_fim2.slx`; indutor de 1059 µH, capacitor de 100 µF, carga de 10 Ω, fonte de 100 V, razão cíclica de 40% e comutação de 20 kHz. O bloco de espaço de estados aponta para `Ap`, `Bp`, `Cp` e `Ep`; o conjunto recebido não inclui um script que defina esses nomes. |
+| Boost | `boost_conversor.slx` e `boost_parametros.m`; indutor de 500 µH, capacitor de 100 µF, carga de 5 Ω, fonte de 48 V, razão cíclica de 40% e comutação de 20 kHz. O bloco de espaço de estados usa as matrizes `Ab`, `Bb`, `Cb` e `Eb`, definidas pelo script. |
+| Buck-Boost | `buck_boost_conversor.slx`; indutor de 1059 µH, capacitor de 100 µF, carga de 10 Ω, fonte de 100 V, razão cíclica de 40% e comutação de 20 kHz. O bloco de espaço de estados aponta para `Ap`, `Bp`, `Cp` e `Ep`; o conjunto recebido não inclui um script que defina esses nomes. |
 
-O arquivo `BUCKboost_fim.slxc` foi mantido em `simulacoes/cache/` porque veio junto com os arquivos. Ele é um cache do modelo chamado `BUCKboost_fim` no MATLAB R2024b; como o modelo incluído se chama `BUCKboost_fim2.slx`, o cache não deve ser tratado como parte necessária para abrir ou executar esse `.slx`.
+O arquivo `BUCKboost_fim.slxc` foi mantido em `simulacoes/cache/` porque veio junto com os arquivos. Ele é um cache do modelo chamado `BUCKboost_fim` no MATLAB R2024b; como o modelo incluído se chama `buck_boost_conversor.slx`, o cache não deve ser tratado como parte necessária para abrir ou executar esse `.slx`.
+
+## Resultados das simulações
+
+Os arquivos recebidos não incluem gráficos nem dados exportados das execuções. Por isso, não registrei valores como se fossem resultados medidos. Quando as simulações forem executadas no Simulink, esta seção pode receber os gráficos de corrente no indutor e tensão no capacitor, junto das condições usadas. No Buck-Boost, o bloco de espaço de estados ainda depende da definição de `Ap`, `Bp`, `Cp` e `Ep`.
 
 ## Como abrir
 
 1. Abra o MATLAB e adicione a pasta do conversor desejado ao caminho.
-2. Para o Boost, execute `Boostscript.m` antes de abrir `Boost.slx`; assim o bloco de espaço de estados encontra as matrizes esperadas.
+2. Para o Boost, execute `boost_parametros.m` antes de abrir `boost_conversor.slx`; assim o bloco de espaço de estados encontra as matrizes esperadas.
 3. Abra o `.slx` correspondente no Simulink. Os modelos usam blocos da biblioteca `sps_lib` e o bloco `powergui`.
 4. Para usar o bloco de espaço de estados do Buck-Boost, será necessário definir no workspace as matrizes `Ap`, `Bp`, `Cp` e `Ep` que o modelo referencia.
 
