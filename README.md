@@ -16,12 +16,22 @@ As equações abaixo foram transcritas do PDF manuscrito para LaTeX. Mantive a n
 │   │   └── buck_boost_topologia_manuscrita.png
 │   └── fonte
 │       └── Modelagem_e_controle_de_conversores.pdf
+├── resultados
+│   ├── boost
+│   │   ├── boost_corrente.png
+│   │   ├── boost_tensao.png
+│   │   └── boost_dados.csv
+│   └── buck-boost
+│       ├── buck_boost_corrente.png
+│       ├── buck_boost_tensao.png
+│       └── buck_boost_dados.csv
 └── simulacoes
     ├── boost
     │   ├── boost_conversor.slx
     │   └── boost_parametros.m
     ├── buck-boost
-    │   └── buck_boost_conversor.slx
+    │   ├── buck_boost_conversor.slx
+    │   └── buck_boost_parametros.m
     └── cache
         └── BUCKboost_fim.slxc
 ```
@@ -313,20 +323,43 @@ A razão cíclica aparece como uma entrada do modelo de pequenos sinais. É isso
 | Conversor | Arquivos e parâmetros encontrados |
 |---|---|
 | Boost | `boost_conversor.slx` e `boost_parametros.m`; indutor de 500 µH, capacitor de 100 µF, carga de 5 Ω, fonte de 48 V, razão cíclica de 40% e comutação de 20 kHz. O bloco de espaço de estados usa as matrizes `Ab`, `Bb`, `Cb` e `Eb`, definidas pelo script. |
-| Buck-Boost | `buck_boost_conversor.slx`; indutor de 1059 µH, capacitor de 100 µF, carga de 10 Ω, fonte de 100 V, razão cíclica de 40% e comutação de 20 kHz. O bloco de espaço de estados aponta para `Ap`, `Bp`, `Cp` e `Ep`; o conjunto recebido não inclui um script que defina esses nomes. |
+| Buck-Boost | `buck_boost_conversor.slx` e `buck_boost_parametros.m`; indutor de 1059 µH, capacitor de 100 µF, carga de 10 Ω, fonte de 100 V, razão cíclica de 40% e comutação de 20 kHz. O script define `Ap`, `Bp`, `Cp` e `Ep` para o bloco de espaço de estados a partir das matrizes do manuscrito. |
 
 O arquivo `BUCKboost_fim.slxc` foi mantido em `simulacoes/cache/` porque veio junto com os arquivos. Ele é um cache do modelo chamado `BUCKboost_fim` no MATLAB R2024b; como o modelo incluído se chama `buck_boost_conversor.slx`, o cache não deve ser tratado como parte necessária para abrir ou executar esse `.slx`.
 
-## Resultados das simulações
+## Modelagem e simulação lado a lado
 
-Os arquivos recebidos não incluem gráficos nem dados exportados das execuções. Por isso, não registrei valores como se fossem resultados medidos. Quando as simulações forem executadas no Simulink, esta seção pode receber os gráficos de corrente no indutor e tensão no capacitor, junto das condições usadas. No Buck-Boost, o bloco de espaço de estados ainda depende da definição de `Ap`, `Bp`, `Cp` e `Ep`.
+Executei os dois modelos por 0,05 s no MATLAB R2024b com Simulink e Simscape Electrical. Nos osciloscópios `I` e `V`, o primeiro sinal vem dos medidores do circuito comutado e o segundo vem do bloco `Modelo transitório`, em espaço de estados. Os gráficos mostram a partida inteira e, abaixo, o último milissegundo. Os CSVs guardam os dados registrados, inclusive a polaridade original da tensão.
+
+Para comparar valores próximos do regime, calculei a média temporal dos sinais no último 1 ms. A diferença abaixo é relativa ao valor do bloco em espaço de estados.
+
+| Conversor | Grandeza | Circuito comutado | Espaço de estados | Diferença |
+|---|---:|---:|---:|---:|
+| Boost | Corrente no indutor | 26,430 A | 26,667 A | −0,89% |
+| Boost | Tensão de saída | 79,306 V | 80,000 V | −0,87% |
+| Buck-Boost | Corrente no indutor | 11,106 A | 11,111 A | −0,04% |
+| Buck-Boost | Módulo da tensão de saída | 66,646 V | 66,667 V | −0,03% |
+
+### Boost
+
+![Comparação da corrente do Boost: circuito comutado e espaço de estados](resultados/boost/boost_corrente.png)
+
+![Comparação da tensão do Boost: circuito comutado e espaço de estados](resultados/boost/boost_tensao.png)
+
+### Buck-Boost
+
+![Comparação da corrente do Buck-Boost: circuito comutado e espaço de estados](resultados/buck-boost/buck_boost_corrente.png)
+
+![Comparação da tensão do Buck-Boost com as polaridades originais e os módulos no último milissegundo](resultados/buck-boost/buck_boost_tensao.png)
+
+No Buck-Boost, o medidor do circuito registra aproximadamente −66,646 V, enquanto o bloco em espaço de estados fornece +66,667 V. Por isso a tabela compara os módulos. Essa concordância de magnitude não resolve a diferença de sinal; a convenção de polaridade do modelo e a divergência entre as relações escalares e a matriz da página 24 precisam ser consideradas ao interpretar a representação em espaço de estados. Mantive os sinais que saíram de cada simulação.
 
 ## Como abrir
 
 1. Abra o MATLAB e adicione a pasta do conversor desejado ao caminho.
 2. Para o Boost, execute `boost_parametros.m` antes de abrir `boost_conversor.slx`; assim o bloco de espaço de estados encontra as matrizes esperadas.
 3. Abra o `.slx` correspondente no Simulink. Os modelos usam blocos da biblioteca `sps_lib` e o bloco `powergui`.
-4. Para usar o bloco de espaço de estados do Buck-Boost, será necessário definir no workspace as matrizes `Ap`, `Bp`, `Cp` e `Ep` que o modelo referencia.
+4. Para o Buck-Boost, execute `buck_boost_parametros.m` antes de abrir `buck_boost_conversor.slx`; o script define `Ap`, `Bp`, `Cp` e `Ep` segundo as matrizes escritas no PDF.
 
 ## Referência bibliográfica
 
