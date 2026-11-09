@@ -48,14 +48,14 @@ O recorte abaixo preserva o esquema que desenhei no PDF.
 
 Na primeira etapa, as relações escalares e a representação em espaço de estados aparecem assim no caderno (página 23):
 
-$$
+```math
 \begin{aligned}
 \dot{i}_L(t) &= \frac{1}{L}V_g \\
 \dot{v}(t) &= -\frac{1}{RC}v(t)
 \end{aligned}
-$$
+```
 
-$$
+```math
 \begin{bmatrix}
 \dot{i}_L(t) \\
 \dot{v}(t)
@@ -74,9 +74,9 @@ v(t)
 \frac{1}{L} \\
 0
 \end{bmatrix}V_g
-$$
+```
 
-$$
+```math
 y(t)=x(t)=
 \begin{bmatrix}
 1 & 0 \\
@@ -91,22 +91,22 @@ v(t)
 0 \\
 0
 \end{bmatrix}V_g
-$$
+```
 
 ### Segunda etapa: chave desligada
 
 A segunda etapa está na página 24. Transcrevi as relações escalares e, em seguida, a matriz exatamente como foram escritas:
 
-$$
+```math
 \begin{aligned}
 v_L &= v \\
 \dot{i}_L(t) &= \frac{1}{L}v \\
 i_C &= -i_L-i_r \\
 C\dot{v}(t) &= -i_L-\frac{v}{R}
 \end{aligned}
-$$
+```
 
-$$
+```math
 \begin{bmatrix}
 \dot{i}_L(t) \\
 \dot{v}(t)
@@ -125,7 +125,7 @@ v(t)
 0 \\
 0
 \end{bmatrix}V_g
-$$
+```
 
 **Nota da transcrição:** no manuscrito, as relações escalares desta etapa e a matriz apresentam sinais de acoplamento diferentes. Mantive ambos como aparecem no PDF e deixei a divergência sinalizada, sem alterar a demonstração.
 
@@ -133,7 +133,7 @@ $$
 
 Na página 34, as matrizes médias são formadas a partir das duas etapas:
 
-$$
+```math
 A_m=DA_1+D'A_2
 =
 \begin{bmatrix}
@@ -145,17 +145,17 @@ A_m=DA_1+D'A_2
 0 & -\frac{D'}{L} \\
 \frac{D'}{C} & -\frac{1}{RC}
 \end{bmatrix}
-$$
+```
 
-$$
+```math
 b_m=Db_1+D'b_2=
 \begin{bmatrix}
 \frac{D}{L} \\
 0
 \end{bmatrix}
-$$
+```
 
-$$
+```math
 C_m=DC_1+D'C_2=
 \begin{bmatrix}
 D+D' & 0 \\
@@ -166,7 +166,7 @@ D+D' & 0 \\
 1 & 0 \\
 0 & 1
 \end{bmatrix}
-$$
+```
 
 ## Boost
 
@@ -182,16 +182,16 @@ Estes recortes mostram as etapas `S on` e `S off` do esquema Boost no PDF (pági
 
 No caderno, a corrente do indutor e a tensão no capacitor obedecem às relações abaixo (página 25):
 
-$$
+```math
 \begin{aligned}
 V_g-L\frac{di_L(t)}{dt} &= 0 \\
 \dot{i}_L(t) &= \frac{1}{L}V_g \\
 i_C+i_r &= C\frac{dv_C(t)}{dt}+\frac{v_C(t)}{R}=0 \\
 \dot{v}_C(t) &= -\frac{1}{RC}v_C(t)
 \end{aligned}
-$$
+```
 
-$$
+```math
 \begin{bmatrix}
 \dot{i}_L(t) \\
 \dot{v}_C(t)
@@ -210,22 +210,22 @@ v_C(t)
 \frac{1}{L} \\
 0
 \end{bmatrix}V_g
-$$
+```
 
 ### Segunda etapa: chave desligada
 
 Com a chave desligada, o indutor também entrega energia à saída (página 26):
 
-$$
+```math
 \begin{aligned}
 V_g-L\frac{di_L(t)}{dt}-v_C(t) &= 0 \\
 \dot{i}_L(t) &= -\frac{1}{L}v_C(t)+\frac{1}{L}V_g \\
 i_L &= i_C+i_r=C\frac{dv_C(t)}{dt}+\frac{v_C(t)}{R} \\
 \dot{v}_C(t) &= \frac{1}{C}i_L(t)-\frac{1}{RC}v_C(t)
 \end{aligned}
-$$
+```
 
-$$
+```math
 \begin{bmatrix}
 \dot{i}_L(t) \\
 \dot{v}_C(t)
@@ -244,13 +244,13 @@ v_C(t)
 \frac{1}{L} \\
 0
 \end{bmatrix}V_g
-$$
+```
 
 ### Modelo médio do Boost
 
 A página 37 aplica a média das matrizes das duas etapas:
 
-$$
+```math
 A_m=DA_1+D'A_2
 =
 \begin{bmatrix}
@@ -262,50 +262,50 @@ A_m=DA_1+D'A_2
 0 & -\frac{D'}{L} \\
 \frac{D'}{C} & -\frac{1}{RC}
 \end{bmatrix}
-$$
+```
 
-$$
+```math
 B_m=DB_1+D'B_2=
 \begin{bmatrix}
 \frac{1}{L} \\
 0
 \end{bmatrix}
-$$
+```
 
 ## Da média ao modelo de pequenos sinais
 
 No PDF, a média em um período de comutação é escrita desta forma (página 30):
 
-$$
+```math
 \frac{d\langle x(t)\rangle_{T_s}}{dt}
 =
 \left[d(t)A_1+d'(t)A_2\right]\langle x(t)\rangle_{T_s}
 +
 \left[d(t)b_1+d'(t)b_2\right]\langle u(t)\rangle_{T_s}
-$$
+```
 
-$$
+```math
 \langle y(t)\rangle_{T_s}
 =
 \left[d(t)C_1+d'(t)C_2\right]\langle x(t)\rangle_{T_s}
 +
 \left[d(t)E_1+d'(t)E_2\right]\langle u(t)\rangle_{T_s}
-$$
+```
 
 Depois, o ponto de operação é separado das pequenas perturbações (páginas 22 e 31):
 
-$$
+```math
 \begin{aligned}
 \langle x(t)\rangle_{T_s} &= X+\hat{x}(t) \\
 \langle u(t)\rangle_{T_s} &= U+\hat{u}(t) \\
 \langle y(t)\rangle_{T_s} &= Y+\hat{y}(t) \\
 d(t) &= D+\hat{d}(t)
 \end{aligned}
-$$
+```
 
 Com a aproximação de pequenas perturbações do caderno, o modelo linearizado fica (página 33):
 
-$$
+```math
 \begin{aligned}
 \frac{d\hat{x}(t)}{dt}
 &=A\hat{x}(t)+b\hat{u}(t)
@@ -314,7 +314,7 @@ $$
 &=C\hat{x}(t)+E\hat{u}(t)
 +\left\{(C_1-C_2)X+(E_1-E_2)U\right\}\hat{d}(t)
 \end{aligned}
-$$
+```
 
 A razão cíclica aparece como uma entrada do modelo de pequenos sinais. É isso que permite usar a representação linearizada para estudar a resposta do conversor perto do ponto de operação.
 
