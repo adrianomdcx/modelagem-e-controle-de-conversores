@@ -1,0 +1,7 @@
+# Arquivos temporários de MATLAB
+*.asv
+*.m~
+*_autosave.slx
+
+# Saídas de compilação do Simulink
+slprj/
